@@ -1,23 +1,76 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:demo_homepage/scaffold_nav_bar.dart';
-import 'package:demo_homepage/screens/home_page/json_data_filter.dart';
+import 'package:demo_homepage/screens/login_screen/LoginMain.dart';
+import 'package:demo_homepage/screens/login_screen/Register.dart';
+import 'package:demo_homepage/screens/user_info_data/BMIscreen.dart';
+import 'package:demo_homepage/utils/CaloriesBloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget{
+class MyApp extends StatefulWidget {
+  static const String id = "main";
+
   @override
-  Widget build(BuildContext context){
-    SystemChrome.setEnabledSystemUIOverlays([]);
-    return MaterialApp(
-      title: 'DSMP demo app',
-      home: MainLayoutBuilder(),
-    );
-  }
+  _MyAppState createState() => _MyAppState();
 }
 
+class _MyAppState extends State<MyApp> {
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  bool isNotLoggedIn = true;
+
+  @override
+  void initState() {
+    super.initState();
+    checkLoggin();
+  }
+
+  void checkLoggin() async {
+    FirebaseUser user = await _auth.currentUser();
+    setState(() {
+      if (user != null) {
+        isNotLoggedIn = false;
+        print(user.email);
+      }
+    });
+    print("User not found");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIOverlays([]);
+    return MaterialApp(
+        title: 'DSMP demo app',
+        routes: {
+          MyApp.id: (context) => MyApp(),
+          BMIscreen.id: (context) => BMIscreen(),
+          MainLayoutBuilder.id: (context) => MainLayoutBuilder(),
+          LoginMain.id: (context) => LoginMain(),
+        },
+        theme: ThemeData(
+          scaffoldBackgroundColor: Color(0xfff9f7f7),
+          appBarTheme: AppBarTheme(
+            color: Color(0xfff9f7f7),
+            iconTheme: IconThemeData (
+              color: Color(0xff112d4e)
+            ),
+            textTheme: TextTheme (
+              title: TextStyle (
+                color: Color(0xff112d4e),
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+              )
+            )
+          )
+        ),
+        home: Scaffold(
+          body: isNotLoggedIn
+              ? LoginMain() : MainLayoutBuilder(),
+        ));
+  }
+}
 /*
 class MyApp extends StatelessWidget {
   @override

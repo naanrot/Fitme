@@ -1,4 +1,7 @@
-import 'package:demo_homepage/screens/home_page/json_data_filter.dart';
+
+import 'package:demo_homepage/utils/json_data_filter.dart';
+import 'package:demo_homepage/repo/list_articles.dart';
+import 'package:demo_homepage/screens/home_page/webview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -9,10 +12,12 @@ class BuildSliverList extends StatefulWidget {
 
 class _BuildSliverListState extends State<BuildSliverList> {
   final JSONDataFilter jsonDataFilter = JSONDataFilter();
+  final News news = News();
   bool isLoading = true;
-  List<String> titles = List<String>();
+  /*List<String> titles = List<String>();
   List<String> imageURLs = List<String>();
   List<String> sources = List<String>();
+  List<String> articleURL = List<String>();*/
 
   final loadingBar = SliverToBoxAdapter(
     child: Center(
@@ -31,13 +36,22 @@ class _BuildSliverListState extends State<BuildSliverList> {
   }
 
   getJSONData() async {
-    if (titles.length == 0) {
+    if (news.article.length == 0) {
       try {
         await jsonDataFilter.jsonDataFetcher();
-        titles = jsonDataFilter.title;
+        await news.startFetcher();
+        //Testing code here
+        try {
+          print(news.article[5].titles);
+        }catch(e){
+          print(e);
+        }
+        //ends here
+        /*titles = jsonDataFilter.title;
         imageURLs = jsonDataFilter.imageURL;
         sources = jsonDataFilter.sources;
-        print(titles.length);
+        articleURL = jsonDataFilter.articleURL;
+        print(titles.length);*/
         setState(() {
           isLoading = false;
         });
@@ -45,6 +59,10 @@ class _BuildSliverListState extends State<BuildSliverList> {
         print('In line 30 in build_bottom_view');
         print(e);
       }
+    } else{
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
@@ -59,6 +77,7 @@ class _BuildSliverListState extends State<BuildSliverList> {
                 child: GestureDetector(
                   onTap: () {
                     print(index);
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>ArticleWebView(url: news.article[index].articleURLs)));
                   },
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
@@ -75,7 +94,7 @@ class _BuildSliverListState extends State<BuildSliverList> {
                         children: <Widget>[
                           ClipRRect(
                             borderRadius: BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
-                            child: Image.network(imageURLs[index]),
+                            child: Image.network(news.article[index].imageURLs),
                           ),
                           Container(
                             decoration: BoxDecoration(
@@ -87,7 +106,7 @@ class _BuildSliverListState extends State<BuildSliverList> {
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                                    titles[index],
+                                    news.article[index].titles,
                                     style: TextStyle(
                                       fontFamily: 'PlayfairDisplay',
                                     ),
@@ -96,7 +115,7 @@ class _BuildSliverListState extends State<BuildSliverList> {
                                 Padding(
                                   padding: const EdgeInsets.all(5.0),
                                   child: Text(
-                                    sources[index],
+                                    news.article[index].sources,
                                     style: TextStyle(
                                       fontSize: 10,
                                     ),
@@ -112,7 +131,7 @@ class _BuildSliverListState extends State<BuildSliverList> {
                 ),
               );
             },
-              childCount: isLoading?0:titles.length
+              childCount: news.article.length,
             ),
           );
   }

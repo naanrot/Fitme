@@ -4,9 +4,13 @@ class BuildSliverAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      title: Text('FitMe',style:TextStyle(fontFamily: 'Pacifico-Regular',fontSize: 30)),
-      centerTitle: true,
-      leading: CircleAvatar(
+      title: Text('FitMe',style:TextStyle(color: Color(0xFF112d4e))),
+      backgroundColor: Color(0xFFF9F7F7),
+    );
+  }
+}
+
+/*leading: CircleAvatar(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Image.asset('images/user.png'),
@@ -17,9 +21,7 @@ class BuildSliverAppBar extends StatelessWidget {
           borderRadius: BorderRadius.only(
               bottomRight: Radius.circular(20),
               bottomLeft: Radius.circular(20))),
-      floating: true,
-      snap: true,
-      actions: <Widget>[
+       actions: <Widget>[
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: FlatButton(
@@ -32,7 +34,7 @@ class BuildSliverAppBar extends StatelessWidget {
           ),
         ),
       ],
-      /*flexibleSpace: FlexibleSpaceBar(
+      flexibleSpace: FlexibleSpaceBar(
         background: ClipRRect(
           child: Container(
             decoration: BoxDecoration(
@@ -42,6 +44,3 @@ class BuildSliverAppBar extends StatelessWidget {
           ),
         ),
       ),*/
-    );
-  }
-}

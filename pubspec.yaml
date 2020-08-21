@@ -4,7 +4,7 @@ description: A new Flutter application.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -12,8 +12,17 @@ dependencies:
 
   cupertino_icons: ^0.1.2
   curved_navigation_bar: ^0.3.2
+  font_awesome_flutter: ^8.5.0
   http:
   flutter_spinkit: ^4.1.1
+  webview_flutter:
+  firebase_auth:
+  cloud_firestore:
+  fl_chart: ^0.9.4
+  fluttertoast: ^4.0.0
+  fit_kit: ^1.1.1
+  provider:
+  animated_text_kit: ^2.0.0
 
 dev_dependencies:
   flutter_test:
