@@ -1,6 +1,6 @@
-# demo_homepage
+# demo_homepage(fitme)
 
-A new Flutter application.
+This project is mini project. This app name is fitme
 
 ## Getting Started
 
