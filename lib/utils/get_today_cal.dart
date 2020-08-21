@@ -6,6 +6,7 @@ class GetTodayCal {
 
   Future getData(String id, String cal) async {
     String q = "id="+ id +"&cal="+ cal;
+
     final jsonBody = await _updateTodayCal.setData(url+q);
     if (jsonBody["conn"] == "connected") {
       if (jsonBody["statusCode"] == "1") {
