@@ -1,16 +1,7 @@
-# demo_homepage(fitme)
+# Fitme
 
 This project is mini project. This app name is fitme
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+An flutter application designed for health enthusiast's to keep track of there calories and maintain a proper diet. With features like BMI calculator, step counter, sleep tracking etc.
