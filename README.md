@@ -2,7 +2,7 @@
 
 An flutter application designed for health enthusiast's to keep track of there calories and maintain a proper diet. With features like BMI calculator, step counter, sleep tracking etc.
 
-  Copyright [yyyy] [name of copyright owner]
+##  Copyright [2021] [Ajmalhusain Eache]
   
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
